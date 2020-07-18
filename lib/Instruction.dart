@@ -5,24 +5,18 @@ class Instruction extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-      backgroundColor: Color(0xFF2965FF),
+      backgroundColor: Colors.blue[900],
       body: Center(
         child: Container(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                    child: Text('chronicleAR',
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'CircularStd',
-                          letterSpacing: 5.0,
-                          color: Color(0xFFFFC107),
-                        )),
-                    alignment: Alignment(1.0, 0.0),
-                    padding: EdgeInsets.only(right: 7)),
+                    child: Image(
+                  image: AssetImage('assets/PhoneScanning.png'),
+                ))
               ]),
+          alignment: Alignment(1.0, 0.0),
         ),
       ),
     ));

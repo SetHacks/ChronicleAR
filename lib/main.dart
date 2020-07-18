@@ -1,8 +1,12 @@
+import 'package:ChronicleAR/ARScanner.dart';
 import 'package:flutter/material.dart';
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    title: 'ChronicleAR',
+    home: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -48,6 +52,17 @@ class MyApp extends StatelessWidget {
                   size: Size(400, 100),
                   painter: MyPainter2(),
                 )),
+                FlatButton(
+                  child: Text("Scan"),
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ARScanner()),
+                    );
+
+
+                  },
+                )
               ]),
         ),
       ),

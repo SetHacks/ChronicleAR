@@ -1,7 +1,9 @@
+import 'dart:async';
+
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
-
+import 'package:sensors/sensors.dart';
 class ARScanner extends StatefulWidget{
   ARScanner({Key key}):super(key:key);
   @override
@@ -13,13 +15,27 @@ class ARScanner extends StatefulWidget{
 }
 class ARScannerPage extends State<ARScanner>{
   ArCoreController arCoreController;
+  List<double> _accelerometerValues;
+  StreamSubscription<dynamic> subscription;
 
   @override
+  void initState() {
+    super.initState();
+    subscription = accelerometerEvents.listen((AccelerometerEvent event) {
+      setState(() {
+        _accelerometerValues = <double>[event.x, event.y, event.z];
+      });
+    });
+  }
+  @override
   Widget build(BuildContext context) {
+
+    final List<String> accelerometer =
+    _accelerometerValues?.map((double v) => v.toStringAsFixed(1))?.toList();
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Hello World'),
+          title: Text('$accelerometer'),
         ),
         body: ArCoreView(
           onArCoreViewCreated: _onArCoreViewCreated,
@@ -30,7 +46,6 @@ class ARScannerPage extends State<ARScanner>{
 
   void _onArCoreViewCreated(ArCoreController controller) {
     arCoreController = controller;
-
     _addSphere(arCoreController);
     _addCylindre(arCoreController);
     _addCube(arCoreController);
@@ -48,6 +63,7 @@ class ARScannerPage extends State<ARScanner>{
       position: vector.Vector3(0, 0, -1.5),
     );
     controller.addArCoreNode(node);
+
   }
 
   void _addCylindre(ArCoreController controller) {
@@ -85,6 +101,7 @@ class ARScannerPage extends State<ARScanner>{
 
   @override
   void dispose() {
+    subscription.cancel();
     arCoreController.dispose();
     super.dispose();
   }

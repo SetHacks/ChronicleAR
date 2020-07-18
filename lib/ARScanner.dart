@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:flutter/material.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 import 'package:sensors/sensors.dart';
 class ARScanner extends StatefulWidget{
@@ -19,6 +21,8 @@ class ARScannerPage extends State<ARScanner>{
   List<double> _accelerometerValues;
   StreamSubscription<dynamic> subscription;
   int a =0;
+  File _imageFile;
+  ScreenshotController screenshotController = ScreenshotController();
 
   @override
   void initState() {

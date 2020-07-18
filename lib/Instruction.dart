@@ -13,26 +13,23 @@ class Instruction extends StatelessWidget {
               children: <Widget>[
                 Container(
                   child: Image(
-                    image: AssetImage(
-                      'assets/PhoneScanning.png',
-                    ),
+                    image: AssetImage('assets/PhoneScanning.png'),
                     height: 150,
                     width: 150,
                   ),
                   alignment: Alignment(-1.0, -1.0),
-                  padding: EdgeInsets.only(left: 7, bottom: 100),
+                  padding: EdgeInsets.only(left: 8, bottom: 100),
                 ),
                 Container(
                   child: Image(
-                    image: AssetImage(
-                      'assets/Info.png',
-                    ),
+                    image: AssetImage('assets/Info.png'),
                     height: 150,
                     width: 150,
                   ),
                   alignment: Alignment(1.0, 1.0),
                   padding: EdgeInsets.only(right: 7, bottom: 100),
                 ),
+                Container(),
               ]),
         ),
       ),

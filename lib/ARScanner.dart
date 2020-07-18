@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'dart:io';
+import 'dart:math';
 
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:flutter/material.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 import 'package:sensors/sensors.dart';
 class ARScanner extends StatefulWidget{
@@ -17,6 +20,9 @@ class ARScannerPage extends State<ARScanner>{
   ArCoreController arCoreController;
   List<double> _accelerometerValues;
   StreamSubscription<dynamic> subscription;
+  int a =0;
+  File _imageFile;
+  ScreenshotController screenshotController = ScreenshotController();
 
   @override
   void initState() {
@@ -29,6 +35,19 @@ class ARScannerPage extends State<ARScanner>{
   }
   @override
   Widget build(BuildContext context) {
+    if(sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b))<0.2){
+      a+=1;
+
+
+
+
+
+    }else{
+      a=0;
+    }
+    if(a>1000){
+
+    }
 
     final List<String> accelerometer =
     _accelerometerValues?.map((double v) => v.toStringAsFixed(1))?.toList();
@@ -38,6 +57,7 @@ class ARScannerPage extends State<ARScanner>{
           title: Text('$accelerometer'),
         ),
         body: ArCoreView(
+
           onArCoreViewCreated: _onArCoreViewCreated,
         ),
       ),

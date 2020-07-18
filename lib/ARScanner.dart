@@ -21,7 +21,7 @@ class ARScannerPage extends State<ARScanner>{
   @override
   void initState() {
     super.initState();
-    subscription = accelerometerEvents.listen((AccelerometerEvent event) {
+    subscription = userAccelerometerEvents.listen((UserAccelerometerEvent event) {
       setState(() {
         _accelerometerValues = <double>[event.x, event.y, event.z];
       });

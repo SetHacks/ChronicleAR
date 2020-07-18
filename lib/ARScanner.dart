@@ -35,21 +35,21 @@ class ARScannerPage extends State<ARScanner>{
   }
   @override
   Widget build(BuildContext context) {
-    if(sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b))<0.2){
+    print(_accelerometerValues);
+    print(sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b)));
+    if(_accelerometerValues != null && sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b))<1){
       a+=1;
-      print('a');
-
-
+      //print(a);
 
 
 
     }else{
       a=0;
     }
-    if(a>1000){
+    if(a>10){
       screenshotController.capture().then((File image) {
         setState(() {
-          print("ggrqw");
+          print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
           _imageFile = image;
         });
       }).catchError((onError) {

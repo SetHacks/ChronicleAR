@@ -30,7 +30,6 @@ class ARScannerPage extends State<ARScanner>{
 
   void _onArCoreViewCreated(ArCoreController controller) {
     arCoreController = controller;
-
     _addSphere(arCoreController);
     _addCylindre(arCoreController);
     _addCube(arCoreController);

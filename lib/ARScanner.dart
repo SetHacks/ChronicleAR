@@ -1,7 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
-
+import 'package:http/http.dart' as http;
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
@@ -51,6 +52,14 @@ class ARScannerPage extends State<ARScanner>{
         setState(() {
           print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
           _imageFile = image;
+          getBookInfo().then((value){
+            if(value!=null){
+              
+
+            }
+
+
+          });
         });
       }).catchError((onError) {
         print(onError);
@@ -138,5 +147,31 @@ class ARScannerPage extends State<ARScanner>{
     arCoreController.dispose();
     super.dispose();
   }
+  Future<BookData> getBookInfo() async {
 
+    Map<String, String> headers = {"Content-type": "application/json"};
+    final response = await http.post("api/decks/",headers:headers,body: _imageFile.readAsBytesSync());
+
+    return BookData.fromJson(response.body);
+
+
+
+
+  }
+
+}
+class BookData {
+  final String name;
+
+
+  @override
+  String toString() {
+    return name;
+  }
+
+  BookData(this.name);
+
+  factory BookData.fromJson(var json) {
+    return BookData(json['name']);
+  }
 }

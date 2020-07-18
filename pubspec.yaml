@@ -31,6 +31,7 @@ dependencies:
   arcore_flutter_plugin: ^0.0.5+1
   sensors: ^0.4.2+2
   screenshot: ^0.2.0
+  http: ^0.12.0+4
 
 dev_dependencies:
   flutter_test:

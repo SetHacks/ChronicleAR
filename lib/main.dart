@@ -52,16 +52,28 @@ class MyApp extends StatelessWidget {
                   size: Size(400, 100),
                   painter: MyPainter2(),
                 )),
-                FlatButton(
-                  child: Text("Scan"),
-                  onPressed: (){
+                const SizedBox(height: 10),
+                RaisedButton(
+                  color: Colors.blue[900],
+                  onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => ARScanner()),
                     );
-
-
                   },
+                  child: Text("Start Scanning",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'CircularStd',
+                        letterSpacing: 2.0,
+                        color: Color(0xFFFFC107),
+                      )),
+/*const SizedBox(height: 30),
+          RaisedButton(
+            onPressed: () {},
+            child: const Text('Enabled Button', style: TextStyle(fontSize: 20)),
+          ),*/
                 )
               ]),
         ),

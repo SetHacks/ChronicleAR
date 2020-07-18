@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 import 'package:sensors/sensors.dart';
+import 'package:path/path.dart';
+
+
 class ARScanner extends StatefulWidget{
   ARScanner({Key key}):super(key:key);
   @override
@@ -49,8 +52,9 @@ class ARScannerPage extends State<ARScanner>{
     if(a>10){
       screenshotController.capture().then((File image) {
         setState(() {
-          print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
           _imageFile = image;
+
+
         });
       }).catchError((onError) {
         print(onError);

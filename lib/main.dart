@@ -1,3 +1,4 @@
+import 'package:ChronicleAR/Instruction.dart';
 import 'package:ChronicleAR/ARScanner.dart';
 import 'package:flutter/material.dart';
 import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
@@ -69,11 +70,24 @@ class MyApp extends StatelessWidget {
                         letterSpacing: 2.0,
                         color: Color(0xFFFFC107),
                       )),
-/*const SizedBox(height: 30),
-          RaisedButton(
-            onPressed: () {},
-            child: const Text('Enabled Button', style: TextStyle(fontSize: 20)),
-          ),*/
+                ),
+                const SizedBox(height: 10),
+                RaisedButton(
+                  color: Colors.blue[50],
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Instruction()),
+                    );
+                  },
+                  child: Text("Instructions",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'CircularStd',
+                        letterSpacing: 4.3,
+                        color: Color(0xFFFFC107),
+                      )),
                 )
               ]),
         ),

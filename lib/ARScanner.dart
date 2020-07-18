@@ -37,6 +37,7 @@ class ARScannerPage extends State<ARScanner>{
   Widget build(BuildContext context) {
     if(sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b))<0.2){
       a+=1;
+      print('a');
 
 
 
@@ -46,6 +47,15 @@ class ARScannerPage extends State<ARScanner>{
       a=0;
     }
     if(a>1000){
+      screenshotController.capture().then((File image) {
+        setState(() {
+          print("ggrqw");
+          _imageFile = image;
+        });
+      }).catchError((onError) {
+        print(onError);
+      });
+      a=0;
 
     }
 
@@ -56,9 +66,12 @@ class ARScannerPage extends State<ARScanner>{
         appBar: AppBar(
           title: Text('$accelerometer'),
         ),
-        body: ArCoreView(
+        body: Screenshot(
+          controller: screenshotController,
+          child: ArCoreView(
 
-          onArCoreViewCreated: _onArCoreViewCreated,
+            onArCoreViewCreated: _onArCoreViewCreated,
+          ),
         ),
       ),
     );

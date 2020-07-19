@@ -1,33 +1,14 @@
 import 'package:ChronicleAR/ARScanner.dart';
-import 'package:ChronicleAR/CapturePage.dart';
 import 'package:flutter/material.dart';
-import 'package:camera/camera.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Obtain a list of the available cameras on the device.
-  final cameras = await availableCameras();
-
-  // Get a specific camera from the list of available cameras.
-  final firstCamera = cameras.first;
-
+void main() {
   runApp(MaterialApp(
     title: 'ChronicleAR',
-    home: MyApp(camera: firstCamera,),
+    home: MyApp(),
   ));
 }
 
-class MyApp extends StatefulWidget {
-  final CameraDescription camera;
-  const MyApp({
-    Key key,
-    @required this.camera,}) : super(key: key);
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -76,7 +57,7 @@ class _MyAppState extends State<MyApp> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => CapturePage(camera: widget.camera,)),
+                      MaterialPageRoute(builder: (context) => ARScanner()),
                     );
                   },
                   child: Text("Start Scanning",

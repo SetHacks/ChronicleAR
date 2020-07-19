@@ -52,6 +52,7 @@ class CapturePageState extends State<CapturePage>{
   }
   @override
   Widget build(BuildContext context) {
+
     if (_accelerometerValues != null && sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b))<1) {
       a+=1;
 
@@ -66,7 +67,7 @@ class CapturePageState extends State<CapturePage>{
       });
 
       a=0;
-
+  
 
     }
     return Scaffold(

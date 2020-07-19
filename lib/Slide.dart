@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
-class Slide extends StatelessWidget {
+class Slide extends StatefulWidget {
+  @override
+  _SlideState createState() => _SlideState();
+}
+
+class _SlideState extends State<Slide> {
   @override
   Widget build(BuildContext context) {
+    double _value=0;
     return MaterialApp(
         home: Scaffold(
       body: SliderTheme(

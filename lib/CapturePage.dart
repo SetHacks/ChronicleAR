@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sensors/sensors.dart';
@@ -63,7 +64,40 @@ class CapturePageState extends State<CapturePage>{
       a=0;
     }
     if(a>100){
-      takePic();
+      takePic().then((value){
+        Query(
+          options: QueryOptions(documentNode: gql("""
+        query book(\$imgBinary: String!) {
+          title
+        }
+        """),
+              variables: {'imgBinary':value},
+            pollInterval: 10
+          ),
+          builder: (QueryResult result, { VoidCallback refetch, FetchMore fetchMore }) {
+            if (result.hasException) {
+              return Text(result.exception.toString());
+            }
+
+            if (result.loading) {
+              return Text('Loading');
+            }
+
+            // it can be either Map or List
+            List repositories = result.data['viewer']['repositories']['nodes'];
+
+            return ListView.builder(
+                itemCount: repositories.length,
+                itemBuilder: (context, index) {
+                  final repository = repositories[index];
+
+                  return Text(repository['name']);
+                });
+          }
+        );
+
+      });
+
       a=0;
 
 
@@ -84,7 +118,7 @@ class CapturePageState extends State<CapturePage>{
     );
 
   }
-  Future<void> takePic() async {
+  Future<String> takePic() async {
     try {
       // Ensure that the camera is initialized.
       await _initializeControllerFuture;
@@ -107,7 +141,8 @@ class CapturePageState extends State<CapturePage>{
       await _controller.takePicture(path);
 
       List<int> bytes = await File(path).readAsBytes();
-      String base64Encode(List<int> bytes) => base64.encode(bytes);
+      return base64.encode(bytes);
+
 
 
     } catch (e) {

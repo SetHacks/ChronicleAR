@@ -45,6 +45,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GraphQLProvider(
+      client: GraphQLConfiguration.client,
       child: MaterialApp(
           home: Scaffold(
         backgroundColor: Color(0xFF2965FF),

@@ -35,7 +35,6 @@ class CapturePageState extends State<CapturePage> {
 
     // Next, initialize the controller. This returns a Future.
     _initializeControllerFuture = _controller.initialize();
-
   }
 
   @override
@@ -52,10 +51,10 @@ class CapturePageState extends State<CapturePage> {
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            _controller.startImageStream((image) => print("aaaaaaaaaaaaaaaaaaaaa"+image.format.raw.toString()));
+            _controller.startImageStream((image) =>
+                print("aaaaaaaaaaaaaaaaaaaaa" + image.format.raw.toString()));
             // If the Future is complete, display the preview.
             return CameraPreview(_controller);
-
           } else {
             // Otherwise, display a loading indicator.
             return Center(child: CircularProgressIndicator());

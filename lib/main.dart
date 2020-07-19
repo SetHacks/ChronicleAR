@@ -3,12 +3,13 @@ import 'package:ChronicleAR/ARScanner.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'graphQLConf.dart';
+import './GraphGLConfiguration.dart';
+import './services/api.services.dart';
 
 import 'CapturePage.dart';
 
 GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
-
+    
 Future<void> main() async {
   // Ensure that plugin services are initialized so that availableCameras()
   // can be called before runApp()
@@ -20,15 +21,13 @@ Future<void> main() async {
   // Get a specific camera from the list of available cameras.
   final firstCamera = cameras.first;
 
-  runApp(
-    MaterialApp (
-      home: GraphQLProvider(
-        client: graphQLConfiguration.client,
-        child: MyApp(
-          // Pass the appropriate camera to the TakePictureScreen widget.
-          camera: firstCamera,
-        ),
+  return runApp(
+    GraphQLProvider(
+      child: MyApp(
+        // Pass the appropriate camera to the TakePictureScreen widget.
+        camera: firstCamera,
       ),
+      client: graphQLConfiguration.client
     )
   );
 }
@@ -46,9 +45,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return GraphQLProvider(
-      client: graphQLConfiguration.client,
-      child: MaterialApp(
+    return
+      MaterialApp(
           home: Scaffold(
         backgroundColor: Color(0xFF2965FF),
         body: Center(
@@ -129,7 +127,7 @@ class _MyAppState extends State<MyApp> {
                 ]),
           ),
         ),
-      )),
+      )
     );
   }
 }

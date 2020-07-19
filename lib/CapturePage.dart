@@ -10,8 +10,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sensors/sensors.dart';
 import 'dart:io';
 
-
-
 class CapturePage extends StatefulWidget{
   final CameraDescription camera;
   const CapturePage({Key key, @required this.camera,}) : super(key: key);
@@ -54,41 +52,16 @@ class CapturePageState extends State<CapturePage>{
   }
   @override
   Widget build(BuildContext context) {
-    if(_accelerometerValues != null && sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b))<1){
+    if (_accelerometerValues != null && sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b))<1) {
       a+=1;
-      //print(a);
 
-
-
-    }else{
+    } else {
       a=0;
     }
-    if(a>100){
+    if (a>100) {
       takePic().then((value){
-        Query(
-          options: QueryOptions(documentNode: gql("""
-        query book(\$imgBinary: String!) {
-          title
-        }
-        """),
-              variables: {'imgBinary':value},
-            pollInterval: 10
-          ),
-          // ignore: missing_return
-          builder: (QueryResult result, { VoidCallback refetch, FetchMore fetchMore }) {
-            if (result.hasException) {
-              return Text(result.exception.toString());
-            }
 
-            if (result.loading) {
-              return Text('Loading');
-            }
-
-            // it can be either Map or List
-            List repositories = result.data['viewer']['repositories']['nodes'];
-          }
-
-        );
+        //take pictures
 
       });
 
@@ -136,8 +109,6 @@ class CapturePageState extends State<CapturePage>{
 
       List<int> bytes = await File(path).readAsBytes();
       return base64.encode(bytes);
-
-
 
     } catch (e) {
       // If an error occurs, log the error to the console.

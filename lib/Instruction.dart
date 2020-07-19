@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:ChronicleAR/ARScanner.dart';
 
 class Instruction extends StatelessWidget {
   @override
@@ -19,7 +20,8 @@ class Instruction extends StatelessWidget {
               backgroundColor: Color(0xFF2965FF),
             ),
             backgroundColor: Color(0xFF2965FF),
-            body: GridView.count(
+            body: Center(
+                child: GridView.count(
               primary: false,
               padding: const EdgeInsets.all(10),
               crossAxisSpacing: 10,
@@ -40,7 +42,7 @@ class Instruction extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontFamily: 'CircularStd',
                         letterSpacing: 1.0,
-                        color: Color(0xFFFFC107),
+                        color: Colors.white,
                       )),
                   color: Color(0xFF2965FF),
                 ),
@@ -53,7 +55,7 @@ class Instruction extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         fontFamily: 'CircularStd',
                         letterSpacing: 1.0,
-                        color: Color(0xFFFFC107),
+                        color: Colors.white,
                       )),
                   color: Color(0xFF2965FF),
                 ),
@@ -65,7 +67,7 @@ class Instruction extends StatelessWidget {
               ],
             ))
 
-        /*Center(
+            /*Center(
         child: Container(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -100,6 +102,6 @@ class Instruction extends StatelessWidget {
         ),
       ),
       */
-        );
+            ));
   }
 }

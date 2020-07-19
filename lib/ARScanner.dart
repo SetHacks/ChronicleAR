@@ -48,7 +48,7 @@ class ARScannerPage extends State<ARScanner> {
                 .reduce((a, b) => a + b)) <
             1) {
       a += 1;
-      //print(a);
+      //print(a);p
 
     } else {
       a = 0;

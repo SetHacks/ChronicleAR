@@ -5,19 +5,24 @@ class Slide extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-            body: Container(
-      child: Center(
-        Slider(
-          min: 0,
-          max: 100,
-          value: _value,
-          onChanged: (value) {
-            setState(() {
-              _value = value;
-            });
-          },
+      body: SliderTheme(
+        data: SliderTheme.of(context).copyWith(
+          activeTrackColor: Colors.red,
+          inactiveTrackColor: Colors.black,
+          trackHeight: 3.0,
+          thumbColor: Colors.yellow,
+          thumbShape: RoundSliderThumbShape(enabledThumbRadius: 8.0),
+          overlayColor: Colors.purple.withAlpha(32),
+          overlayShape: RoundSliderOverlayShape(overlayRadius: 14.0),
         ),
+        child: Slider(
+            value: _value,
+            onChanged: (value) {
+              setState(() {
+                _value = value;
+              });
+            }),
       ),
-    )));
+    ));
   }
 }

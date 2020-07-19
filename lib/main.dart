@@ -21,13 +21,15 @@ Future<void> main() async {
   final firstCamera = cameras.first;
 
   runApp(
-    GraphQLProvider(
-      client: graphQLConfiguration.client,
-      child: MyApp(
-        // Pass the appropriate camera to the TakePictureScreen widget.
-        camera: firstCamera,
+    MaterialApp (
+      home: GraphQLProvider(
+        client: graphQLConfiguration.client,
+        child: MyApp(
+          // Pass the appropriate camera to the TakePictureScreen widget.
+          camera: firstCamera,
+        ),
       ),
-    ),
+    )
   );
 }
 
@@ -45,7 +47,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return GraphQLProvider(
-      client: GraphQLConfiguration.client,
+      client: graphQLConfiguration.client,
       child: MaterialApp(
           home: Scaffold(
         backgroundColor: Color(0xFF2965FF),
@@ -131,6 +133,7 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
 
 class MyPainter extends CustomPainter {
   //         <-- CustomPainter class

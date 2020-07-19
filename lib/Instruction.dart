@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ChronicleAR/ARScanner.dart';
+import 'CapturePage.dart';
 
 class Instruction extends StatelessWidget {
   @override
@@ -72,10 +73,7 @@ class Instruction extends StatelessWidget {
             RaisedButton(
               color: Colors.blue[900],
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ARScanner()),
-                );
+                Navigator.pop(context);
               },
               child: Text("Start",
                   style: TextStyle(

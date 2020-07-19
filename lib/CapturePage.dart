@@ -54,9 +54,14 @@ class CapturePageState extends State<CapturePage>{
   }
   @override
   Widget build(BuildContext context) {
+
+    Container(
+        child: CustomPaint(
+          size: Size(400, 100),
+          painter: MyPainter3(),
+        ));
     if(_accelerometerValues != null && sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b))<1){
       a+=1;
-      //print(a);
 
 
 
@@ -64,7 +69,9 @@ class CapturePageState extends State<CapturePage>{
       a=0;
     }
     if(a>100){
+      print("abcdefg");
       takePic().then((value){
+        print("taken");
         Query(
           options: QueryOptions(documentNode: gql("""
         query book(\$imgBinary: String!) {
@@ -76,6 +83,7 @@ class CapturePageState extends State<CapturePage>{
           ),
           // ignore: missing_return
           builder: (QueryResult result, { VoidCallback refetch, FetchMore fetchMore }) {
+
             if (result.hasException) {
               return Text(result.exception.toString());
             }
@@ -85,7 +93,8 @@ class CapturePageState extends State<CapturePage>{
             }
 
             // it can be either Map or List
-            List repositories = result.data['viewer']['repositories']['nodes'];
+            print(result);
+
           }
 
         );
@@ -124,7 +133,6 @@ class CapturePageState extends State<CapturePage>{
         // Find the temp directory using the `path_provider` plugin.
         (await getTemporaryDirectory()).path, 'book.png',);
 
-      print(path);
       if (FileSystemEntity.typeSync(path) != FileSystemEntityType.notFound) {
         File temp = new File(path);
         temp.delete();
@@ -145,4 +153,25 @@ class CapturePageState extends State<CapturePage>{
     }
   }
 
+}
+
+class MyPainter3 extends CustomPainter {
+  //         <-- CustomPainter class
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint();
+    paint.color = Colors.black;
+    paint.strokeWidth = 5;
+
+    canvas.drawLine(
+      Offset(225, 115),
+      Offset(400, -10),
+      paint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter old) {
+    return false;
+  }
 }

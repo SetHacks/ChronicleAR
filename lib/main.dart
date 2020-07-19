@@ -1,5 +1,8 @@
 import 'package:ChronicleAR/ARScanner.dart';
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+
+import 'CapturePage.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -8,7 +11,14 @@ void main() {
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  final CameraDescription camera;
+  const MyApp({Key key, @required this.camera,}) : super(key: key);
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -57,7 +67,7 @@ class MyApp extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ARScanner()),
+                      MaterialPageRoute(builder: (context) => CapturePage(camera:widget.camera)),
                     );
                   },
                   child: Text("Start Scanning",

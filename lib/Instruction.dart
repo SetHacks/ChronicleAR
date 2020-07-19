@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:ChronicleAR/ARScanner.dart';
+import 'package:ChronicleAR/ARScanner.dart';
 
 class Instruction extends StatelessWidget {
   @override
@@ -64,44 +64,58 @@ class Instruction extends StatelessWidget {
                     child: Image(
                       image: AssetImage('assets/Info.png'),
                     )),
+                new Container(
+                  child: new Column(children: <Widget>[
+                    new Expanded(
+                        child: Container(
+                      const SizedBox(
+                        height: 30,
+                        width: 50,
+                      ),
+                      RaisedButton(
+                        color: Colors.blue[900],
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ARScanner()),
+                          );
+                        },
+                        child: Text("Start Scanning",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: 'CircularStd',
+                              letterSpacing: 2.0,
+                              color: Color(0xFFFFC107),
+                            )),
+                      ),
+                    ))
+                  ]),
+                )
               ],
-            ))
-
-            /*Center(
-        child: Container(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  child: Image(
-                    image: AssetImage('assets/PhoneScanning.png'),
-                    height: 150,
-                    width: 150,
-                  ),
-                  alignment: Alignment(-1.0, -1.0),
-                  padding: EdgeInsets.only(left: 8, bottom: 100),
-                ),
-                Container(
-                  child: Image(
-                    image: AssetImage('assets/Info.png'),
-                    height: 150,
-                    width: 150,
-                  ),
-                  alignment: Alignment(1.0, 1.0),
-                  padding: EdgeInsets.only(right: 7, bottom: 100),
-                ),
-                Container(
-                  child: Image(
-                    image: AssetImage('assets/Text1.png'),
-                    height: 150,
-                    width: 150,
-                  ),
-                  alignment: Alignment(0.0, 0.0),
-                ),
-              ]),
-        ),
-      ),
-      */
-            ));
+            ))));
   }
 }
+
+/*const SizedBox(
+                      height: 30,
+                      width: 50,
+                    ),
+                    RaisedButton(
+                      color: Colors.blue[900],
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ARScanner()),
+                        );
+                      },
+                      child: Text("Start Scanning",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'CircularStd',
+                            letterSpacing: 2.0,
+                            color: Color(0xFFFFC107),
+                          )),
+                    ),*/

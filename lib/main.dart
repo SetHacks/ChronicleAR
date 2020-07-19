@@ -2,8 +2,12 @@ import 'package:ChronicleAR/Instruction.dart';
 import 'package:ChronicleAR/ARScanner.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'graphQLConf.dart';
 
 import 'CapturePage.dart';
+
+GraphQLConfiguration graphQLConfiguration = GraphQLConfiguration();
 
 Future<void> main() async {
   // Ensure that plugin services are initialized so that availableCameras()
@@ -17,9 +21,9 @@ Future<void> main() async {
   final firstCamera = cameras.first;
 
   runApp(
-    MaterialApp(
-      theme: ThemeData.dark(),
-      home: MyApp(
+    GraphQLProvider(
+      client: graphQLConfiguration.client,
+      child: MyApp(
         // Pass the appropriate camera to the TakePictureScreen widget.
         camera: firstCamera,
       ),

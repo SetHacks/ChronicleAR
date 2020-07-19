@@ -74,6 +74,7 @@ class CapturePageState extends State<CapturePage>{
               variables: {'imgBinary':value},
             pollInterval: 10
           ),
+          // ignore: missing_return
           builder: (QueryResult result, { VoidCallback refetch, FetchMore fetchMore }) {
             if (result.hasException) {
               return Text(result.exception.toString());
@@ -85,15 +86,8 @@ class CapturePageState extends State<CapturePage>{
 
             // it can be either Map or List
             List repositories = result.data['viewer']['repositories']['nodes'];
-
-            return ListView.builder(
-                itemCount: repositories.length,
-                itemBuilder: (context, index) {
-                  final repository = repositories[index];
-
-                  return Text(repository['name']);
-                });
           }
+
         );
 
       });

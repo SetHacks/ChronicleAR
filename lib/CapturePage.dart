@@ -58,6 +58,7 @@ class CapturePageState extends State<CapturePage>{
     if(a>10){
 
     }*/
+
     return Scaffold(
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,

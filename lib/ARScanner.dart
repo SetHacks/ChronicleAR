@@ -3,9 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 import 'package:http/http.dart' as http;
-import 'package:arcore_flutter_plugin/arcore_flutter_plugin.dart';
 import 'package:flutter/material.dart';
-import 'package:screenshot/screenshot.dart';
 import 'package:vector_math/vector_math_64.dart' as vector;
 import 'package:sensors/sensors.dart';
 class ARScanner extends StatefulWidget{
@@ -13,17 +11,14 @@ class ARScanner extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
     return ARScannerPage();
-
   }
 
 }
 class ARScannerPage extends State<ARScanner>{
-  ArCoreController arCoreController;
   List<double> _accelerometerValues;
   StreamSubscription<dynamic> subscription;
   int a =0;
   File _imageFile;
-  ScreenshotController screenshotController = ScreenshotController();
 
   @override
   void initState() {
@@ -40,31 +35,11 @@ class ARScannerPage extends State<ARScanner>{
     print(sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b)));
     if(_accelerometerValues != null && sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b))<1){
       a+=1;
-      //print(a);
-
-
 
     }else{
       a=0;
     }
     if(a>10){
-      screenshotController.capture().then((File image) {
-        setState(() {
-          print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-          _imageFile = image;
-          getBookInfo().then((value){
-            if(value!=null){
-
-
-            }
-
-
-          });
-        });
-      }).catchError((onError) {
-        print(onError);
-      });
-      a=0;
 
     }
 
@@ -75,13 +50,6 @@ class ARScannerPage extends State<ARScanner>{
         appBar: AppBar(
           title: Text('$accelerometer'),
         ),
-        body: Screenshot(
-          controller: screenshotController,
-          child: ArCoreView(
-
-            onArCoreViewCreated: _onArCoreViewCreated,
-          ),
-        ),
       ),
     );
   }
@@ -90,9 +58,9 @@ class ARScannerPage extends State<ARScanner>{
   @override
   void dispose() {
     subscription.cancel();
-    arCoreController.dispose();
     super.dispose();
   }
+
   Future<BookData> getBookInfo() async {
 
     Map<String, String> headers = {"Content-type": "application/json"};
@@ -100,15 +68,11 @@ class ARScannerPage extends State<ARScanner>{
 
     return BookData.fromJson(response.body);
 
-
-
-
   }
 
 }
 class BookData {
   final String name;
-
 
   @override
   String toString() {

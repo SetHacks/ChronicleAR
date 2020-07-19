@@ -5,18 +5,20 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:sensors/sensors.dart';
 
-class CapturePage extends StatefulWidget{
+class CapturePage extends StatefulWidget {
   final CameraDescription camera;
-  const CapturePage({Key key, @required this.camera,}) : super(key: key);
+  const CapturePage({
+    Key key,
+    @required this.camera,
+  }) : super(key: key);
   @override
   State<StatefulWidget> createState() => new CapturePageState();
-
 }
 
-class CapturePageState extends State<CapturePage>{
+class CapturePageState extends State<CapturePage> {
   List<double> _accelerometerValues;
   StreamSubscription<dynamic> subscription;
-  int a=0;
+  int a = 0;
   CameraController _controller;
   Future<void> _initializeControllerFuture;
   @override
@@ -38,7 +40,9 @@ class CapturePageState extends State<CapturePage>{
 
     // Next, initialize the controller. This returns a Future.
     _initializeControllerFuture = _controller.initialize();
+    _controller.startImageStream((image) => print(image.format.raw.toString()));
   }
+
   @override
   void dispose() {
     // Dispose of the controller when the widget is disposed.
@@ -48,17 +52,6 @@ class CapturePageState extends State<CapturePage>{
 
   @override
   Widget build(BuildContext context) {
-    /*if(_accelerometerValues != null && sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b))<1){
-      a+=1;
-      //print(a);
-
-    }else{
-      a=0;
-    }
-    if(a>10){
-
-    }*/
-
     return Scaffold(
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
@@ -73,6 +66,5 @@ class CapturePageState extends State<CapturePage>{
         },
       ),
     );
-
   }
 }

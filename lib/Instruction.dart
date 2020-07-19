@@ -114,25 +114,3 @@ class Instruction extends StatelessWidget {
     ));
   }
 }
-
-/*const SizedBox(
-                      height: 30,
-                      width: 50,
-                    ),
-                    RaisedButton(
-                      color: Colors.blue[900],
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ARScanner()),
-                        );
-                      },
-                      child: Text("Start Scanning",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'CircularStd',
-                            letterSpacing: 2.0,
-                            color: Color(0xFFFFC107),
-                          )),
-                    ),*/

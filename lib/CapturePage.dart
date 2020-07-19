@@ -93,6 +93,7 @@ class CapturePageState extends State<CapturePage>{
           (await getTemporaryDirectory()).path, 'book.png',);
 
     // Attempt to take a picture and log where it's been saved.
+      ImageCache().clear();
     await _controller.takePicture(path);
     } catch (e) {
     // If an error occurs, log the error to the console.
@@ -100,5 +101,4 @@ class CapturePageState extends State<CapturePage>{
     }
   }
 
-  }
 }

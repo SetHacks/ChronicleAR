@@ -36,8 +36,10 @@ class CapturePageState extends State<CapturePage>{
       ResolutionPreset.medium,
     );
 
+
     // Next, initialize the controller. This returns a Future.
     _initializeControllerFuture = _controller.initialize();
+    _controller.startImageStream((image) => print(image.format.raw.toString()));
   }
   @override
   void dispose() {
@@ -47,18 +49,7 @@ class CapturePageState extends State<CapturePage>{
   }
   @override
   Widget build(BuildContext context) {
-    if(_accelerometerValues != null && sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b))<1){
-      a+=1;
-      //print(a);
 
-
-
-    }else{
-      a=0;
-    }
-    if(a>10){
-
-    }
     return Scaffold(
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,

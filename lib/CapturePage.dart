@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:camera/camera.dart';
@@ -6,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sensors/sensors.dart';
+import 'dart:io';
+
+
 
 class CapturePage extends StatefulWidget{
   final CameraDescription camera;
@@ -58,7 +62,7 @@ class CapturePageState extends State<CapturePage>{
     }else{
       a=0;
     }
-    if(a>10){
+    if(a>100){
       takePic();
       a=0;
 
@@ -90,14 +94,25 @@ class CapturePageState extends State<CapturePage>{
       final path = join(
         // Store the picture in the temp directory.
         // Find the temp directory using the `path_provider` plugin.
-          (await getTemporaryDirectory()).path, 'book.png',);
+        (await getTemporaryDirectory()).path, 'book.png',);
 
-    // Attempt to take a picture and log where it's been saved.
+      print(path);
+      if (FileSystemEntity.typeSync(path) != FileSystemEntityType.notFound) {
+        File temp = new File(path);
+        temp.delete();
+      }
+
+      // Attempt to take a picture and log where it's been saved.
       ImageCache().clear();
-    await _controller.takePicture(path);
+      await _controller.takePicture(path);
+
+      List<int> bytes = await File(path).readAsBytes();
+      String base64Encode(List<int> bytes) => base64.encode(bytes);
+
+
     } catch (e) {
-    // If an error occurs, log the error to the console.
-    print(e);
+      // If an error occurs, log the error to the console.
+      print(e);
     }
   }
 

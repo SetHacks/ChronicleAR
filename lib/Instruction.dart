@@ -104,6 +104,13 @@ class Instruction extends StatelessWidget {
         icon: Icon(Icons.scanner, color: Colors.blue[900]),
         backgroundColor: Colors.blue[50],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      bottomNavigationBar: BottomAppBar(
+          elevation: 0.0,
+          child: Container(
+            height: 60,
+            color: Color(0xFF2965FF),
+          )),
     ));
   }
 }

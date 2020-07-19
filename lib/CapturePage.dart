@@ -1,5 +1,9 @@
+import 'dart:async';
+import 'dart:math';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:sensors/sensors.dart';
 
 class CapturePage extends StatefulWidget{
   final CameraDescription camera;
@@ -10,11 +14,19 @@ class CapturePage extends StatefulWidget{
 }
 
 class CapturePageState extends State<CapturePage>{
+  List<double> _accelerometerValues;
+  StreamSubscription<dynamic> subscription;
+  int a =0;
   CameraController _controller;
   Future<void> _initializeControllerFuture;
   @override
   void initState() {
     super.initState();
+    subscription = userAccelerometerEvents.listen((UserAccelerometerEvent event) {
+      setState(() {
+        _accelerometerValues = <double>[event.x, event.y, event.z];
+      });
+    });
     // To display the current output from the Camera,
     // create a CameraController.
     _controller = CameraController(
@@ -35,6 +47,18 @@ class CapturePageState extends State<CapturePage>{
   }
   @override
   Widget build(BuildContext context) {
+    if(_accelerometerValues != null && sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b))<1){
+      a+=1;
+      //print(a);
+
+
+
+    }else{
+      a=0;
+    }
+    if(a>10){
+
+    }
     return Scaffold(
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,

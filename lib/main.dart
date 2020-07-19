@@ -40,88 +40,90 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-      backgroundColor: Color(0xFF2965FF),
-      body: Center(
-        child: Container(
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                    child: Text('chronicleAR',
+    return GraphQLProvider(
+      child: MaterialApp(
+          home: Scaffold(
+        backgroundColor: Color(0xFF2965FF),
+        body: Center(
+          child: Container(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                      child: Text('chronicleAR',
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'CircularStd',
+                            letterSpacing: 5.0,
+                            color: Color(0xFFFFC107),
+                          )),
+                      alignment: Alignment(1.0, 0.0),
+                      padding: EdgeInsets.only(right: 7)),
+                  Container(
+                      child: Text('explore the unknown',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'CircularStd',
+                            letterSpacing: 4.0,
+                            color: Color(0xFFFFFFFF),
+                          )),
+                      alignment: Alignment(1.0, 1.0),
+                      padding: EdgeInsets.only(right: 7)),
+                  Container(
+                      child: CustomPaint(
+                    size: Size(400, 100),
+                    painter: MyPainter(),
+                  )),
+                  Container(
+                      child: CustomPaint(
+                    size: Size(400, 100),
+                    painter: MyPainter2(),
+                  )),
+                  const SizedBox(height: 10),
+                  RaisedButton(
+                    color: Colors.blue[900],
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                CapturePage(camera: widget.camera)),
+                      );
+                    },
+                    child: Text("Start Scanning",
                         style: TextStyle(
-                          fontSize: 30,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'CircularStd',
-                          letterSpacing: 5.0,
+                          letterSpacing: 2.0,
                           color: Color(0xFFFFC107),
                         )),
-                    alignment: Alignment(1.0, 0.0),
-                    padding: EdgeInsets.only(right: 7)),
-                Container(
-                    child: Text('explore the unknown',
+                  ),
+                  const SizedBox(height: 10),
+                  RaisedButton(
+                    color: Colors.blue[50],
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Instruction()),
+                      );
+                    },
+                    child: Text("Instructions",
                         style: TextStyle(
-                          fontSize: 15,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'CircularStd',
-                          letterSpacing: 4.0,
-                          color: Color(0xFFFFFFFF),
+                          letterSpacing: 4.3,
+                          color: Color(0xFFFFC107),
                         )),
-                    alignment: Alignment(1.0, 1.0),
-                    padding: EdgeInsets.only(right: 7)),
-                Container(
-                    child: CustomPaint(
-                  size: Size(400, 100),
-                  painter: MyPainter(),
-                )),
-                Container(
-                    child: CustomPaint(
-                  size: Size(400, 100),
-                  painter: MyPainter2(),
-                )),
-                const SizedBox(height: 10),
-                RaisedButton(
-                  color: Colors.blue[900],
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              CapturePage(camera: widget.camera)),
-                    );
-                  },
-                  child: Text("Start Scanning",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'CircularStd',
-                        letterSpacing: 2.0,
-                        color: Color(0xFFFFC107),
-                      )),
-                ),
-                const SizedBox(height: 10),
-                RaisedButton(
-                  color: Colors.blue[50],
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Instruction()),
-                    );
-                  },
-                  child: Text("Instructions",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'CircularStd',
-                        letterSpacing: 4.3,
-                        color: Color(0xFFFFC107),
-                      )),
-                )
-              ]),
+                  )
+                ]),
+          ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }
 

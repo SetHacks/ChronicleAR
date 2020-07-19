@@ -10,8 +10,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sensors/sensors.dart';
 import 'dart:io';
 
-
-
 class CapturePage extends StatefulWidget{
   final CameraDescription camera;
   const CapturePage({Key key, @required this.camera,}) : super(key: key);
@@ -55,54 +53,21 @@ class CapturePageState extends State<CapturePage>{
   @override
   Widget build(BuildContext context) {
 
-    Container(
-        child: CustomPaint(
-          size: Size(400, 100),
-          painter: MyPainter3(),
-        ));
-    if(_accelerometerValues != null && sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b))<1){
+    if (_accelerometerValues != null && sqrt(_accelerometerValues.map((e) =>pow(e,2) ).reduce((a, b) => a+b))<1) {
       a+=1;
 
-
-
-    }else{
+    } else {
       a=0;
     }
-    if(a>100){
-      print("abcdefg");
+    if (a>100) {
       takePic().then((value){
-        print("taken");
-        Query(
-          options: QueryOptions(documentNode: gql("""
-        query book(\$imgBinary: String!) {
-          title
-        }
-        """),
-              variables: {'imgBinary':value},
-            pollInterval: 10
-          ),
-          // ignore: missing_return
-          builder: (QueryResult result, { VoidCallback refetch, FetchMore fetchMore }) {
 
-            if (result.hasException) {
-              return Text(result.exception.toString());
-            }
-
-            if (result.loading) {
-              return Text('Loading');
-            }
-
-            // it can be either Map or List
-            print(result);
-
-          }
-
-        );
+        //take pictures
 
       });
 
       a=0;
-
+  
 
     }
     return Scaffold(
@@ -133,6 +98,7 @@ class CapturePageState extends State<CapturePage>{
         // Find the temp directory using the `path_provider` plugin.
         (await getTemporaryDirectory()).path, 'book.png',);
 
+      print(path);
       if (FileSystemEntity.typeSync(path) != FileSystemEntityType.notFound) {
         File temp = new File(path);
         temp.delete();
@@ -145,33 +111,10 @@ class CapturePageState extends State<CapturePage>{
       List<int> bytes = await File(path).readAsBytes();
       return base64.encode(bytes);
 
-
-
     } catch (e) {
       // If an error occurs, log the error to the console.
       print(e);
     }
   }
 
-}
-
-class MyPainter3 extends CustomPainter {
-  //         <-- CustomPainter class
-  @override
-  void paint(Canvas canvas, Size size) {
-    var paint = Paint();
-    paint.color = Colors.black;
-    paint.strokeWidth = 5;
-
-    canvas.drawLine(
-      Offset(225, 115),
-      Offset(400, -10),
-      paint,
-    );
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter old) {
-    return false;
-  }
 }
